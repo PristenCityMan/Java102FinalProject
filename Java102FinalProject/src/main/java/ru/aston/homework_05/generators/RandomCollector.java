@@ -16,7 +16,7 @@ public class RandomCollector extends BaseCollectionGenerator<IBaseClass> {
 
     @Override
     List<IBaseClass> generate() throws NullPointerException {
-        // TODO: псевдослучайное заполнение, например via Fakers
+        // TODO: Fakers
         return IntStream.range(0, size).mapToObj(i -> {
             String name = names.get((int)(Math.random() * size));
             return User.Builder.builder()

@@ -35,7 +35,7 @@ public class User extends BaseClass {
 
     @Override
     public String getFirstFieldName() {
-        return "Имя";
+        return "Имя пользователя";
     }
 
     @Override

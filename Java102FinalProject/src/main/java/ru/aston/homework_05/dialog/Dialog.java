@@ -7,7 +7,6 @@ import ru.aston.homework_05.generators.FileCollector;
 import ru.aston.homework_05.generators.RandomCollector;
 import ru.aston.homework_05.models.IBaseClass;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,14 +33,7 @@ public class Dialog {
 
             length = answerTaker(LENGTH_TEXT);
 
-            List<IBaseClass> items = new ArrayList<>(length);
-            switch (classType) {
-                case 1, 2:
-                    items = getClass1Array(typeFilling, length);
-                    break;
-                default:
-                    break;
-            }
+            List<IBaseClass> items = getCollection(typeFilling, length, typeFilling == 1 ? USERS_FILE_NAME : WORKSPACES_FILE_NAME);
 
             sortField = answerTaker("""
                     Выберите поле для сортировки:
@@ -50,7 +42,6 @@ public class Dialog {
                     3: Class1.getThirdFieldName()""");
 
             // TODO: как сделать сортировку. Что передаём, что возвращаем?
-
             if (answerTaker(EXIT) == 0) {
                 break;
             }
@@ -71,10 +62,10 @@ public class Dialog {
         }
     }
 
-    public static List<IBaseClass> getClass1Array(int fillType, int size) {
+    public static List<IBaseClass> getCollection(int fillType, int size, String fileName) {
         BaseCollectionGenerator<IBaseClass> generator = null;
         switch (fillType) {
-            case 1 -> generator = new FileCollector<>(FILE_NAME);
+            case 1 -> generator = new FileCollector<>(fileName);
             case 2 -> generator = new RandomCollector(size);
             case 3 -> generator = new ConsoleCollector(size);
         }
@@ -83,5 +74,6 @@ public class Dialog {
         return client.get();
     }
 
-    private static final String FILE_NAME = "Java102FinalProject/src/main/resources/users.json";
+    private static final String USERS_FILE_NAME = "Java102FinalProject/src/main/resources/users.json";
+    private static final String WORKSPACES_FILE_NAME = "Java102FinalProject/src/main/resources/workspaces.json";
 }
