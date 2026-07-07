@@ -6,4 +6,5 @@ out/
 /.idea/
 *.iml
 /lib/
-/*.class/
+*.class
+/target/
