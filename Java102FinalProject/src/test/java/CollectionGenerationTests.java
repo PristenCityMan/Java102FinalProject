@@ -3,7 +3,6 @@ import ru.aston.homework_05.generators.BaseCollectionGenerator;
 import ru.aston.homework_05.generators.CollectionGeneratorClient;
 import ru.aston.homework_05.generators.FileCollector;
 import ru.aston.homework_05.generators.RandomCollector;
-import ru.aston.homework_05.models.IBaseClass;
 import ru.aston.homework_05.models.User;
 
 import java.util.Collection;
@@ -34,9 +33,9 @@ public class CollectionGenerationTests {
     @Test
     void when_RandomCollector_thenReturnNonEmptyCollection() {
         Integer size = 100500;
-        BaseCollectionGenerator<IBaseClass> placeholder = new RandomCollector(size);
-        CollectionGeneratorClient<IBaseClass> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
-        Collection<IBaseClass> collection = collectionGeneratorClient.get();
+        BaseCollectionGenerator<User> placeholder = new RandomCollector(size);
+        CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
+        Collection<User> collection = collectionGeneratorClient.get();
         assertEquals(size, collection.size());
     }
 }

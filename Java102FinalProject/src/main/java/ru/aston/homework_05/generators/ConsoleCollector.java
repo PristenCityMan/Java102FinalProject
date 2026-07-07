@@ -1,6 +1,5 @@
 package ru.aston.homework_05.generators;
 
-import ru.aston.homework_05.models.IBaseClass;
 import ru.aston.homework_05.models.User;
 
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ public class ConsoleCollector extends RandomCollector {
     }
 
     @Override
-    List<IBaseClass> generate() throws NullPointerException {
+    List<User> generate() throws NullPointerException {
         Scanner in = new Scanner(System.in);
-        List<IBaseClass> collection = new ArrayList<>();
+        List<User> collection = new ArrayList<>();
         for(int i = 0; i < size; ++i) {
             System.out.print("Введите имя пользователя, пожалуйста: ");
             String name = in.nextLine();

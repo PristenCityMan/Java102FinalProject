@@ -28,23 +28,19 @@ public class User extends BaseClass {
         return name;
     }
 
-    @Override
-    public String getClassName() {
+    public static String getClassName() {
         return "User";
     }
 
-    @Override
-    public String getFirstFieldName() {
+    public static String getFirstFieldName() {
         return "Имя пользователя";
     }
 
-    @Override
-    public String getSecondFieldName() {
+    public static String getSecondFieldName() {
         return "Электронная почта";
     }
 
-    @Override
-    public String getThirdFieldName() {
+    public static String getThirdFieldName() {
         return "Пароль";
     }
 

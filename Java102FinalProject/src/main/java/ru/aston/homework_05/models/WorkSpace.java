@@ -17,23 +17,19 @@ public class WorkSpace extends BaseClass {
         this.seat = seat;
     }
 
-    @Override
-    public String getClassName() {
+    public static String getClassName() {
         return "WorkSpace";
     }
 
-    @Override
-    public String getFirstFieldName() {
+    public static String getFirstFieldName() {
         return "Название";
     }
 
-    @Override
-    public String getSecondFieldName() {
+    public static String getSecondFieldName() {
         return "Номер помещения";
     }
 
-    @Override
-    public String getThirdFieldName() {
+    public static String getThirdFieldName() {
         return "Номер места";
     }
 }
