@@ -9,6 +9,7 @@ import ru.aston.homework_05.generators.RandomCollector;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +21,8 @@ public class Dialog {
             3: Вручную""";
     private static final String LENGTH_TEXT = "Выберите длину массива:";
     private static final String EXIT_TEXT = "Для выхода из программы выберете 0, для повторения работы любое другое число.";
+    private static final List<Integer> VALID_LIST3 = Arrays.asList(1, 2, 3);
+    private static final List<Integer> VALID_LIST2 = Arrays.asList(1, 2);
 
     public static void dialog() {
         System.out.println("Вас приветствует программа сортировки классов.\n " + "Выбирайте вариант из предложенных.");
@@ -27,9 +30,9 @@ public class Dialog {
             int classType = answerTaker("""
                     Выберите класс:
                     1: %s
-                    2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()));
+                    2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2);
 
-            int typeFilling = answerTaker(TYPE_FILLING_TEXT);
+            int typeFilling = answerTaker(TYPE_FILLING_TEXT,VALID_LIST3);
 
             int length = answerTaker(LENGTH_TEXT);
 
@@ -46,16 +49,35 @@ public class Dialog {
                     2: %s
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
-                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()));
+                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()),VALID_LIST3);
 
             // TODO: как сделать сортировку. Что передаём, что возвращаем?
+
+
             if (answerTaker(EXIT_TEXT) == 0) {
                 break;
             }
         }
     }
 
-    private static int answerTaker(String message) {
+    public static int answerTaker(String message, List<Integer> validAnswer) {
+        System.out.println(message);
+        int choice;
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (validAnswer.contains(choice)) {
+                    return choice;
+                }
+            }
+            else scanner.next();
+            System.out.println("Некорректные данные. Повторите ввод.");
+
+        }
+    }
+
+    public static int answerTaker(String message) {
         System.out.println(message);
         int choice;
         while (true) {
@@ -63,16 +85,17 @@ public class Dialog {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 return choice;
-            } else {
-                System.out.println("Некорректные данные. Повторите ввод.");
             }
+            System.out.println("Некорректные данные. Повторите ввод.");
+
         }
     }
 
     private static List<User> get1stClassCollection(int fillType, int size) {
         BaseCollectionGenerator<User> generator = null;
         switch (fillType) {
-            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, User.getClassName().toLowerCase()));
+            case 1 ->
+                    generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, User.getClassName().toLowerCase()));
             case 2 -> generator = new RandomCollector(size);
             case 3 -> generator = new ConsoleCollector(size);
         }
@@ -85,7 +108,8 @@ public class Dialog {
             throws ExecutionControl.NotImplementedException {
         BaseCollectionGenerator<WorkSpace> generator = null;
         switch (fillType) {
-            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, WorkSpace.getClassName().toLowerCase()));
+            case 1 ->
+                    generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, WorkSpace.getClassName().toLowerCase()));
             case 2 ->
                     throw new ExecutionControl.NotImplementedException("Метод случайной генерации рабочих мест не реализован");
             case 3 ->
