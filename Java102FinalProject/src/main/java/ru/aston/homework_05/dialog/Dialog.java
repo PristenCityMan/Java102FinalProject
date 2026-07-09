@@ -63,15 +63,14 @@ public class Dialog {
     public static int answerTaker(String message, List<Integer> validAnswer) {
         System.out.println(message);
         int choice;
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (validAnswer.contains(choice)) {
                     return choice;
                 }
             }
-            else scanner.next();
             System.out.println("Некорректные данные. Повторите ввод.");
 
         }
@@ -80,14 +79,14 @@ public class Dialog {
     public static int answerTaker(String message) {
         System.out.println(message);
         int choice;
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 return choice;
             }
             System.out.println("Некорректные данные. Повторите ввод.");
-
+            scanner.nextLine();
         }
     }
 
