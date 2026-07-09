@@ -48,6 +48,7 @@ public class Dialog {
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
                     classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()));
 
+
             // TODO: как сделать сортировку. Что передаём, что возвращаем?
             if (answerTaker(EXIT_TEXT) == 0) {
                 break;

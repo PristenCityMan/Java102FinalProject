@@ -1,4 +1,6 @@
-package ru.aston.homework_05.sort;
+package ru.aston.homework_05.sort.comparators;
+
+import ru.aston.homework_05.models.WorkSpace;
 
 import java.util.Comparator;
 
