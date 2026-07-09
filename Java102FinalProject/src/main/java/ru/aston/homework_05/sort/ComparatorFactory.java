@@ -20,8 +20,8 @@ public class ComparatorFactory {
     public static <T> Comparator<T> userFieldsSort(Class<T> clas, int fieldNumber) {
         return switch (fieldNumber) {
             case 1 -> (Comparator<T>) new UserNameComparator();
-            case 2 -> (Comparator<T>) new PasswordComparator();
-            case 3 -> (Comparator<T>) new EmailComparator();
+            case 2 -> (Comparator<T>) new EmailComparator();
+            case 3 -> (Comparator<T>) new PasswordComparator();
             default -> throw new IllegalArgumentException("Неверный номер поля: " + fieldNumber);
         };
     }
