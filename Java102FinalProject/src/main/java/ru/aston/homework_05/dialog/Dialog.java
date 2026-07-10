@@ -1,6 +1,5 @@
 package ru.aston.homework_05.dialog;
 
-import jdk.jshell.spi.ExecutionControl;
 import ru.aston.homework_05.generators.BaseCollectionGenerator;
 import ru.aston.homework_05.generators.CollectionGeneratorClient;
 import ru.aston.homework_05.generators.ConsoleCollector;
@@ -40,12 +39,7 @@ public class Dialog {
             int length = answerTaker(LENGTH_TEXT);
 
             List<User> users = get1stClassCollection(typeFilling, length);
-            List<WorkSpace> workSpaces = null;
-            try {
-                workSpaces = get2ndClassCollection(typeFilling, length);
-            } catch (ExecutionControl.NotImplementedException nie) {
-
-            }
+            List<WorkSpace> workSpaces = get2ndClassCollection(typeFilling, length);
 
             int field = answerTaker("""
                     Выберите поле для сортировки:
@@ -100,28 +94,25 @@ public class Dialog {
     }
 
     private static List<User> get1stClassCollection(int fillType, int size) {
+        String className = User.class.getSimpleName();
         BaseCollectionGenerator<User> generator = null;
         switch (fillType) {
-            case 1 ->
-                    generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, User.getClassName().toLowerCase()));
-            case 2 -> generator = new RandomCollector(size);
-            case 3 -> generator = new ConsoleCollector(size);
+            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()));
+            case 2 -> generator = new RandomCollector(size, className);
+            case 3 -> generator = new ConsoleCollector(size, className);
         }
 
         CollectionGeneratorClient<User> client = new CollectionGeneratorClient<>(generator);
         return client.get();
     }
 
-    private static List<WorkSpace> get2ndClassCollection(int fillType, int size)
-            throws ExecutionControl.NotImplementedException {
+    private static List<WorkSpace> get2ndClassCollection(int fillType, int size) {
+        String className = WorkSpace.class.getSimpleName();
         BaseCollectionGenerator<WorkSpace> generator = null;
         switch (fillType) {
-            case 1 ->
-                    generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, WorkSpace.getClassName().toLowerCase()));
-            case 2 ->
-                    throw new ExecutionControl.NotImplementedException("Метод случайной генерации рабочих мест не реализован");
-            case 3 ->
-                    throw new ExecutionControl.NotImplementedException("Метод генерации рабочих мест из консоли не реализован");
+            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()));
+            case 2 -> generator = new RandomCollector(size,className);
+            case 3 -> generator = new ConsoleCollector(size, className);
         }
 
         CollectionGeneratorClient<WorkSpace> client = new CollectionGeneratorClient<>(generator);

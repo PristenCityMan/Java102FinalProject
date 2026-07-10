@@ -16,7 +16,7 @@ public class FileCollector<T> extends BaseCollectionGenerator<T> {
     }
 
     @Override
-    public List<T> generate() throws NullPointerException {
+    public List<T> generate() {
         try {
             return readFile();
         } catch (IOException e) {
