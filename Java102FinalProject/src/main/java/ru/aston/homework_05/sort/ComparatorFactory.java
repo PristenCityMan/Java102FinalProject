@@ -10,14 +10,14 @@ public class ComparatorFactory {
 
     public static <T> Comparator<T> classFieldsSort(Class<T> clas, int fieldNumber) {
         if (clas == User.class) {
-            userFieldsSort(clas, fieldNumber);
+            return userFieldsSort(fieldNumber);
         } else if (clas == WorkSpace.class) {
-            workSpaceFieldsSort(clas, fieldNumber);
+            return workSpaceFieldsSort(fieldNumber);
         }
         throw new IllegalArgumentException("Неизвестный класс: " + clas.getName());
     }
 
-    public static <T> Comparator<T> userFieldsSort(Class<T> clas, int fieldNumber) {
+    public static <T> Comparator<T> userFieldsSort( int fieldNumber) {
         return switch (fieldNumber) {
             case 1 -> (Comparator<T>) new UserNameComparator();
             case 2 -> (Comparator<T>) new EmailComparator();
@@ -26,7 +26,7 @@ public class ComparatorFactory {
         };
     }
 
-    public static <T> Comparator<T> workSpaceFieldsSort(Class<T> clas, int fieldNumber) {
+    public static <T> Comparator<T> workSpaceFieldsSort(int fieldNumber) {
         return switch (fieldNumber) {
             case 1 -> (Comparator<T>) new WorkSpaceNameComparator();
             case 2 -> (Comparator<T>) new SpaceComparator();

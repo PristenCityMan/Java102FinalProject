@@ -21,8 +21,8 @@ public class MergeSortingTests {
         users.add(new User.Builder().addName("Yana").addEmail("yana@gmail.com").build());
 
         MergeSort.sort(users, new UserNameComparator());
-        assertEquals("Alice", users.getFirst().getFirstFieldName());
-        assertEquals("Yana", users.getLast().getFirstFieldName());
+        assertEquals("Alisa", users.get(0).getName());
+        assertEquals("Yana", users.get(4).getName());
     }
     @Test
     void testSortingByEmail() {
@@ -34,9 +34,9 @@ public class MergeSortingTests {
         users.add(new User.Builder().addName("Yana").addEmail("jana@gmail.com").build());
 
         MergeSort.sort(users, new EmailComparator());
-        assertEquals("brs@gmail.com", users.getFirst().getSecondFieldName());
-        assertEquals("eeeegor@gmail.com", users.get(1).getSecondFieldName());
-        assertEquals("vlad@gmail.com", users.getLast().getSecondFieldName());
+        assertEquals("brs@gmail.com", users.get(0).getName());
+        assertEquals("eeeegor@gmail.com", users.get(1).getName());
+        assertEquals("vlad@gmail.com", users.get(4).getName());
     }
     @Test
     void testShouldHandleEmptyList() {
@@ -55,8 +55,8 @@ public class MergeSortingTests {
         users.add(new User.Builder().addName("Alisa").addEmail("liza@gmail.com").build());
 
         MergeSort.sort(users, new UserNameComparator());
-        assertEquals("Alisa", users.getFirst().getFirstFieldName());
-        assertEquals("Yana", users.getLast().getFirstFieldName());
+        assertEquals("Alisa", users.get(0).getEmail());
+        assertEquals("Yana", users.get(4).getEmail());
     }
 
 }
