@@ -62,9 +62,6 @@ public class Dialog {
                 sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
             }
 
-            // TODO: как сделать сортировку. Что передаём, что возвращаем?
-
-
             if (answerTaker(EXIT_TEXT) == 0) {
                 break;
             }
@@ -81,9 +78,10 @@ public class Dialog {
                 if (validAnswer.contains(choice)) {
                     return choice;
                 }
+
             }
             System.out.println("Некорректные данные. Повторите ввод.");
-
+            scanner.nextLine();
         }
     }
 
