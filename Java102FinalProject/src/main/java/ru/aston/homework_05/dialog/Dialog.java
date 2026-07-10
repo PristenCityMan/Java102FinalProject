@@ -8,7 +8,11 @@ import ru.aston.homework_05.generators.FileCollector;
 import ru.aston.homework_05.generators.RandomCollector;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
+import ru.aston.homework_05.sort.ComparatorFactory;
+import ru.aston.homework_05.sort.MergeSort;
+import ru.aston.homework_05.sort.comparators.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,19 +38,27 @@ public class Dialog {
             int length = answerTaker(LENGTH_TEXT);
 
             List<User> users = get1stClassCollection(typeFilling, length);
+            List<WorkSpace> workSpaces = null;
             try {
-                List<WorkSpace> workSpaces = get2ndClassCollection(typeFilling, length);
+                workSpaces = get2ndClassCollection(typeFilling, length);
             } catch (ExecutionControl.NotImplementedException nie) {
 
             }
 
-            answerTaker("""
+            int field = answerTaker("""
                     Выберите поле для сортировки:
                     1: %s
                     2: %s
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
                     classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()));
+
+
+            if (classType == 1) {
+                sortAndPrint(users, User.class, field, "Пользователи");
+            } else {
+                sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
+            }
 
             // TODO: как сделать сортировку. Что передаём, что возвращаем?
             if (answerTaker(EXIT_TEXT) == 0) {
@@ -94,6 +106,21 @@ public class Dialog {
 
         CollectionGeneratorClient<WorkSpace> client = new CollectionGeneratorClient<>(generator);
         return client.get();
+    }
+
+    private static <T> void sortAndPrint(List<T> list, Class<T> clas, int choice, String className) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("Список " + className + " пуст");
+            return;
+        }
+        try {
+            Comparator<T> comparator = ComparatorFactory.classFieldsSort(clas, choice);
+            MergeSort.sort(list, comparator);
+            System.out.println("Сортировка завершена:");
+            list.forEach(System.out::println);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
     }
 
     private static final String FILES_DIRECTORY = "src/main/resources/";
