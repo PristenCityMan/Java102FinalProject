@@ -15,13 +15,13 @@ public class ComparatorFactoryTests {
     @Test
     void test_FactoryShouldReturnCorrectComparatorForUser() {
         Comparator<User> c = ComparatorFactory.classFieldsSort(User.class, 1);
-        assertTrue(c instanceof UserNameComparator);
+        assertInstanceOf(UserNameComparator.class, c);
 
         c = ComparatorFactory.classFieldsSort(User.class, 2);
-        assertTrue(c instanceof EmailComparator);
+        assertInstanceOf(EmailComparator.class, c);
 
         c = ComparatorFactory.classFieldsSort(User.class, 3);
-        assertTrue(c instanceof PasswordComparator);
+        assertInstanceOf(PasswordComparator.class, c);
     }
     @Test
     void test_FactoryShouldThrowExceptionForInvalidField() {
@@ -33,18 +33,20 @@ public class ComparatorFactoryTests {
     void test_UserNameComparatorShouldCompareByName() {
         User user1 = new User.Builder().addName("Liza").build();
         User user2 = new User.Builder().addName("Rob").build();
+        User user3 = new User.Builder().addName("Liza").build();
         UserNameComparator c = new UserNameComparator();
         assertTrue(c.compare(user1, user2) < 0);
-        assertTrue(c.compare(user1, user2) > 0);
-        assertEquals(0, c.compare(user1, user2));
+        assertTrue(c.compare(user2, user1) > 0);
+        assertEquals(0, c.compare(user1, user3));
     }
     @Test
     void test_WorkSpaceNameComparatorShouldCompareByName() {
         WorkSpace w1 = new WorkSpace("Lizas", 1, 1);
         WorkSpace w2 = new WorkSpace("Robs", 2,2);
+        WorkSpace w3 = new WorkSpace("Lizas", 3, 3);
         WorkSpaceNameComparator c = new WorkSpaceNameComparator();
         assertTrue(c.compare(w1, w2) < 0);
-        assertTrue(c.compare(w1, w2) > 0);
-        assertEquals(0, c.compare(w1, w2));
+        assertTrue(c.compare(w2, w1) > 0);
+        assertEquals(0, c.compare(w1, w3));
     }
 }
