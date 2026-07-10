@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class SeatComparator implements Comparator<WorkSpace> {
     @Override
     public int compare(WorkSpace w1, WorkSpace w2) {
-        return Integer.compare(w1.getThirdFieldName(), w2.getThirdFieldName());
+        return Integer.compare(w1.getSeat(), w2.getSeat());
     }
 }

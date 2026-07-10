@@ -17,6 +17,18 @@ public class WorkSpace extends BaseClass {
         this.seat = seat;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getSeat() {
+        return seat;
+    }
+
+    public int getSpace() {
+        return space;
+    }
+
     public static String getClassName() {
         return "WorkSpace";
     }

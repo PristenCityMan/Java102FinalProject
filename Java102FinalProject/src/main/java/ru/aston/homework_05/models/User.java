@@ -28,6 +28,14 @@ public class User extends BaseClass {
         return name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public static String getClassName() {
         return "User";
     }
