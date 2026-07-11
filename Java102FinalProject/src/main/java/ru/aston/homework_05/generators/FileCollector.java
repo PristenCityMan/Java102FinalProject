@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileCollector<T> extends BaseCollectionGenerator<T> {
@@ -21,7 +22,7 @@ public class FileCollector<T> extends BaseCollectionGenerator<T> {
             return readFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 
