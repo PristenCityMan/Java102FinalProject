@@ -1,8 +1,1 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
-/.idea/
-*.iml
-/lib/
+/.idea
