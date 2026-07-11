@@ -6,14 +6,14 @@ import org.jetbrains.annotations.Contract;
 
 import java.util.Base64;
 
-public class User extends BaseClass {
+public class User extends BaseClassImpl {
     private final String name;
     private final String email;
     private String password;
 
     @Contract(pure = true)
     @JsonCreator
-    protected User(@JsonProperty("name") String name, @JsonProperty("email") String email) {
+    public User(@JsonProperty("name") String name, @JsonProperty("email") String email) {
         this.name = name;
         this.email = email;
     }
