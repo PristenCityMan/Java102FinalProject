@@ -1,5 +1,6 @@
 package ru.aston.homework_05.generators;
 
+import net.datafaker.Faker;
 import ru.aston.homework_05.models.BaseClass;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
@@ -19,30 +20,24 @@ public class RandomCollector<T extends BaseClass> extends BaseCollectionGenerato
 
     @Override
     List<T> generate() {
-        // TODO: Fakers
+        var faker = new Faker();
         return IntStream.range(0, size).mapToObj(i -> {
             if (type.equals(User.getClassName())) {
-                String name = getRandomNameFromCollection();
+                String name = faker.name().fullName();
                 return (T) User.Builder.builder()
                         .addName(name)
-                        .addEmail(name + "@" + emailDomainName)
+                        .addEmail(faker.internet().emailAddress())
                         .addPassword()
                         .build();
             } else if (type.equals(WorkSpace.getClassName())) {
                 return (T) WorkSpace.Builder.builder()
-                        .addSpace((int) (Math.random() * 10))
-                        .addSeat((int) (Math.random() * 100))
+                        .addName(faker.address().cityName())
+                        .addSpace((int) (Math.random() * 10) + 1)
+                        .addSeat((int) (Math.random() * 100) + 1)
                         .build();
             } else {
                 return null;
             }
         }).collect(Collectors.toList());
     }
-
-    private String getRandomNameFromCollection() {
-        var names = List.of("Сергей", "Вадим", "Максим");
-        return names.get((int) (Math.random() * names.size()));
-    }
-
-    private final String emailDomainName = "mail.ru";
 }
