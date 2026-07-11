@@ -1,5 +1,11 @@
 package ru.aston.homework_05.dialog;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
 import ru.aston.homework_05.generators.BaseCollectionGenerator;
 import ru.aston.homework_05.generators.CollectionGeneratorClient;
 import ru.aston.homework_05.generators.ConsoleCollector;
@@ -10,10 +16,6 @@ import ru.aston.homework_05.models.WorkSpace;
 import ru.aston.homework_05.sort.ComparatorFactory;
 import ru.aston.homework_05.sort.MergeSort;
 import ru.aston.homework_05.sort.comparators.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
 
 public class Dialog {
     private static final String TYPE_FILLING_TEXT = """
@@ -33,13 +35,16 @@ public class Dialog {
                     Выберите класс:
                     1: %s
                     2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2);
-
             int typeFilling = answerTaker(TYPE_FILLING_TEXT,VALID_LIST3);
-
             int length = answerTaker(LENGTH_TEXT);
 
-            List<User> users = get1stClassCollection(typeFilling, length);
-            List<WorkSpace> workSpaces = get2ndClassCollection(typeFilling, length);
+            List<User> users = new ArrayList<>();
+            List<WorkSpace> workSpaces = new ArrayList<>();
+            if (classType == 1) {
+                users = get1stClassCollection(typeFilling, length);
+            } else {
+                workSpaces = get2ndClassCollection(typeFilling, length);
+            }
 
             int field = answerTaker("""
                     Выберите поле для сортировки:
@@ -48,7 +53,6 @@ public class Dialog {
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
                     classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()),VALID_LIST3);
-
 
             if (classType == 1) {
                 sortAndPrint(users, User.class, field, "Пользователи");
