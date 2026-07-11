@@ -6,7 +6,7 @@ import ru.aston.homework_05.sort.comparators.*;
 
 import java.util.Comparator;
 
-public class ComparatorFactory {
+public class ComparatorStrategy {
 
     public static <T> Comparator<T> classFieldsSort(Class<T> clas, int fieldNumber) {
         if (clas == User.class) {
