@@ -55,7 +55,8 @@ public class Dialog {
                     2: %s
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
-                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()));
+                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()),VALID_LIST3);
+
             switch (classType) {
                 case 1:
                     sortAndPrint(users, User.class, field, "Пользователи");
