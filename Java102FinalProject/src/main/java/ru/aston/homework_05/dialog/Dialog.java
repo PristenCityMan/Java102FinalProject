@@ -11,6 +11,7 @@ import ru.aston.homework_05.models.WorkSpace;
 import ru.aston.homework_05.sort.ComparatorStrategy;
 import ru.aston.homework_05.sort.MergeSort;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -34,17 +35,15 @@ public class Dialog {
                     Выберите класс:
                     1: %s
                     2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()));
-
             int typeFilling = answerTaker(TYPE_FILLING_TEXT);
-
             int length = answerTaker(LENGTH_TEXT);
 
-            List<User> users = get1stClassCollection(typeFilling, length);
-            List<WorkSpace> workSpaces = null;
-            try {
+            List<User> users = new ArrayList<>();
+            List<WorkSpace> workSpaces = new ArrayList<>();
+            if (classType == 1) {
+                users = get1stClassCollection(typeFilling, length);
+            } else {
                 workSpaces = get2ndClassCollection(typeFilling, length);
-            } catch (ExecutionControl.NotImplementedException nie) {
-                System.out.println("Ошибка: " + nie.getMessage());
             }
 
             int field = answerTaker("""
