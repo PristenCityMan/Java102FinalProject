@@ -16,10 +16,6 @@ import ru.aston.homework_05.models.WorkSpace;
 import ru.aston.homework_05.sort.ComparatorStrategy;
 import ru.aston.homework_05.sort.MergeSort;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
 import java.util.function.ToIntFunction;
 
 public class Dialog {
