@@ -38,7 +38,7 @@ public class Dialog {
                     Выберите класс:
                     1: %s
                     2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2);
-            int typeFilling = answerTaker(TYPE_FILLING_TEXT,VALID_LIST3);
+            int typeFilling = answerTaker(TYPE_FILLING_TEXT, VALID_LIST3);
             int length = answerTaker(LENGTH_TEXT);
 
             List<User> users = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Dialog {
                     2: %s
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
-                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()),VALID_LIST3);
+                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()), VALID_LIST3);
 
             switch (classType) {
                 case 1:
@@ -126,7 +126,7 @@ public class Dialog {
         switch (fillType) {
             case 1 -> generator = new FileCollector<>(
                     "%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()), WorkSpace.class);
-            case 2 -> generator = new RandomCollector<>(size,className);
+            case 2 -> generator = new RandomCollector<>(size, className);
             case 3 -> generator = new ConsoleCollector<>(size, className);
         }
 
@@ -150,6 +150,10 @@ public class Dialog {
     }
 
     private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("Список пуст, сортировка невозможна.");
+            return;
+        }
         try {
             Comparator<T> comparator = ComparatorStrategy.classFieldsSort(clas, choice);
             MergeSort.sortEvenByIndices(list, extractor, comparator);
