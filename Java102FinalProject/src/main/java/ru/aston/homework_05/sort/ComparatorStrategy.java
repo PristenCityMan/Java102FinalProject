@@ -17,7 +17,7 @@ public class ComparatorStrategy {
         throw new IllegalArgumentException("Неизвестный класс: " + clas.getName());
     }
 
-    public static <T> Comparator<T> userFieldsSort( int fieldNumber) {
+    public static <T> Comparator<T> userFieldsSort(int fieldNumber) {
         return switch (fieldNumber) {
             case 1 -> (Comparator<T>) new UserNameComparator();
             case 2 -> (Comparator<T>) new EmailComparator();

@@ -24,6 +24,7 @@ public class MergeSortingTests {
         assertEquals("Alisa", users.get(0).getName());
         assertEquals("Yana", users.get(4).getName());
     }
+
     @Test
     void testSortingByEmail() {
         List<User> users = new ArrayList<>();
@@ -38,12 +39,14 @@ public class MergeSortingTests {
         assertEquals("eeeegor@gmail.com", users.get(1).getEmail());
         assertEquals("vlad@gmail.com", users.get(4).getEmail());
     }
+
     @Test
     void testShouldHandleEmptyList() {
         List<User> empty = new ArrayList<>();
         MergeSort.sort(empty, new UserNameComparator());
         assertTrue(empty.isEmpty(), "Список должен быть пуст");
     }
+
     @Test
     void testShouldReverseOrder() {
         List<User> users = new ArrayList<>();
