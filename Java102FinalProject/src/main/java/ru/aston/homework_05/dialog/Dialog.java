@@ -98,12 +98,13 @@ public class Dialog {
     }
 
     private static List<User> get1stClassCollection(int fillType, int size) {
-        String className = User.class.getSimpleName();
+        String classSimpleName = User.class.getSimpleName();
         BaseCollectionGenerator<User> generator = null;
         switch (fillType) {
-            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()));
-            case 2 -> generator = new RandomCollector(size, className);
-            case 3 -> generator = new ConsoleCollector(size, className);
+            case 1 -> generator = new FileCollector<>(
+                    "%s%ss.json".formatted(FILES_DIRECTORY, classSimpleName.toLowerCase()), User.class);
+            case 2 -> generator = new RandomCollector<>(size, classSimpleName);
+            case 3 -> generator = new ConsoleCollector<>(size, classSimpleName);
         }
 
         CollectionGeneratorClient<User> client = new CollectionGeneratorClient<>(generator);
@@ -114,9 +115,10 @@ public class Dialog {
         String className = WorkSpace.class.getSimpleName();
         BaseCollectionGenerator<WorkSpace> generator = null;
         switch (fillType) {
-            case 1 -> generator = new FileCollector<>("%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()));
-            case 2 -> generator = new RandomCollector(size,className);
-            case 3 -> generator = new ConsoleCollector(size, className);
+            case 1 -> generator = new FileCollector<>(
+                    "%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()), WorkSpace.class);
+            case 2 -> generator = new RandomCollector<>(size,className);
+            case 3 -> generator = new ConsoleCollector<>(size, className);
         }
 
         CollectionGeneratorClient<WorkSpace> client = new CollectionGeneratorClient<>(generator);

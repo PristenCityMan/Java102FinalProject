@@ -1,7 +1,7 @@
 package ru.aston.homework_05.generators;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.aston.homework_05.models.BaseClass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileCollector<T> extends BaseCollectionGenerator<T> {
+public class FileCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
     private final String filename;
+    private final Class<T> _class;
 
-    public FileCollector(String filename) {
+    public FileCollector(String filename, Class<T> elementClass) {
         this.filename = filename;
+        this._class = elementClass;
     }
 
     @Override
@@ -30,8 +32,8 @@ public class FileCollector<T> extends BaseCollectionGenerator<T> {
         File file = new File(filename);
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(file, new TypeReference<>() {
-            });
+            return objectMapper.readValue(file,
+                    objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, _class));
         } catch (FileNotFoundException fe) {
             throw new FileNotFoundException("json файл не найден");
         } catch (IOException e) {
