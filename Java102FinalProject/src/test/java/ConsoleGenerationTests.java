@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 public class ConsoleGenerationTests {
     @Mock
-    BaseCollectionGenerator<User> placeholder;
-    Faker faker;
+    private BaseCollectionGenerator<User> placeholder;
+    private Faker faker;
 
     @BeforeEach
     void setUp() {
@@ -28,14 +28,15 @@ public class ConsoleGenerationTests {
     }
 
     @Test
-    void when_CollectorName_thenReturnCollectionWithName() {
+    void when_givenUserName_thenReturnUserWithThatName() {
         String name = faker.name().fullName();
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
-        Mockito.when(collectionGeneratorClient.get()).thenReturn(List.of(User.Builder.builder().addName(name).build()));
+        Mockito.when(collectionGeneratorClient.get())
+                .thenReturn(List.of(new User(name, faker.internet().emailAddress())));
         Collection<User> collection = collectionGeneratorClient.get();
         String actualName = collection.stream()
                 .map(User::getName)
-                .findFirst()
+                .findAny()
                 .orElse(null);
         assertEquals(name, actualName);
     }

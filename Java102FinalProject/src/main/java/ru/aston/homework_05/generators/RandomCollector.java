@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
-    protected final int size;
     protected final String type;
 
     public RandomCollector(int size, String type) {
