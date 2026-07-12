@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 public class ConsoleGenerationTests {
     @Mock
-    BaseCollectionGenerator<User> placeholder;
-    Faker faker;
+    private BaseCollectionGenerator<User> placeholder;
+    private Faker faker;
 
     @BeforeEach
     void setUp() {

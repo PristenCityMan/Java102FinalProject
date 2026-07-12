@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CollectionGenerationTests {
     @Test
     void whenDeserializeUsers_givenValidJsonFile_thenCollectionItemNameNotEmpty() {
-        String fileName = "src/main/resources/users.json";
+        String fileName = "src/test/resources/users.json";
         BaseCollectionGenerator<User> placeholder = new FileCollector<>(fileName, User.class);
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<User> collection = collectionGeneratorClient.get();
@@ -36,7 +36,7 @@ public class CollectionGenerationTests {
 
     @Test
     void whenDeserializeWorkspaces_givenValidJsonFile_thenCollectionItemNameNotEmpty() {
-        String fileName = "src/main/resources/workspaces.json";
+        String fileName = "src/test/resources/workspaces.json";
         BaseCollectionGenerator<WorkSpace> placeholder = new FileCollector<>(fileName, WorkSpace.class);
         CollectionGeneratorClient<WorkSpace> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<WorkSpace> collection = collectionGeneratorClient.get();
