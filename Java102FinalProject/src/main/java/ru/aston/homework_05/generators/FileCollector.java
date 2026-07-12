@@ -25,7 +25,6 @@ public class FileCollector<T extends BaseClass> extends BaseCollectionGenerator<
         try {
             List<T> list = readFile();
             return list.subList(0, Math.min(size, list.size()));
-           // return readFile().subList(0, Math.min(size, readFile().size()));
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return new ArrayList<>();
