@@ -7,7 +7,7 @@ import ru.aston.homework_05.generators.FileCollector;
 import ru.aston.homework_05.generators.RandomCollector;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
-import ru.aston.homework_05.sort.ComparatorFactory;
+import ru.aston.homework_05.sort.ComparatorStrategy;
 import ru.aston.homework_05.sort.MergeSort;
 import ru.aston.homework_05.sort.comparators.*;
 import java.util.Arrays;
@@ -125,7 +125,7 @@ public class Dialog {
             return;
         }
         try {
-            Comparator<T> comparator = ComparatorFactory.classFieldsSort(clas, choice);
+            Comparator<T> comparator = ComparatorStrategy.classFieldsSort(clas, choice);
             MergeSort.sort(list, comparator);
             System.out.println("Сортировка завершена:");
             list.forEach(System.out::println);

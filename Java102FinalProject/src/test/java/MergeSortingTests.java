@@ -24,6 +24,7 @@ public class MergeSortingTests {
         assertEquals("Alisa", users.get(0).getName());
         assertEquals("Yana", users.get(4).getName());
     }
+
     @Test
     void testSortingByEmail() {
         List<User> users = new ArrayList<>();
@@ -34,16 +35,18 @@ public class MergeSortingTests {
         users.add(new User.Builder().addName("Yana").addEmail("jana@gmail.com").build());
 
         MergeSort.sort(users, new EmailComparator());
-        assertEquals("brs@gmail.com", users.get(0).getName());
-        assertEquals("eeeegor@gmail.com", users.get(1).getName());
-        assertEquals("vlad@gmail.com", users.get(4).getName());
+        assertEquals("brs@gmail.com", users.get(0).getEmail());
+        assertEquals("eeeegor@gmail.com", users.get(1).getEmail());
+        assertEquals("vlad@gmail.com", users.get(4).getEmail());
     }
+
     @Test
     void testShouldHandleEmptyList() {
         List<User> empty = new ArrayList<>();
         MergeSort.sort(empty, new UserNameComparator());
         assertTrue(empty.isEmpty(), "Список должен быть пуст");
     }
+
     @Test
     void testShouldReverseOrder() {
         List<User> users = new ArrayList<>();
@@ -55,8 +58,8 @@ public class MergeSortingTests {
         users.add(new User.Builder().addName("Alisa").addEmail("liza@gmail.com").build());
 
         MergeSort.sort(users, new UserNameComparator());
-        assertEquals("Alisa", users.get(0).getEmail());
-        assertEquals("Yana", users.get(4).getEmail());
+        assertEquals("Alisa", users.get(0).getName());
+        assertEquals("Yana", users.get(5).getName());
     }
 
 }

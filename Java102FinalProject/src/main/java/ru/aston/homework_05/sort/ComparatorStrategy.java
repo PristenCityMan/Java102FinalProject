@@ -6,7 +6,7 @@ import ru.aston.homework_05.sort.comparators.*;
 
 import java.util.Comparator;
 
-public class ComparatorFactory {
+public class ComparatorStrategy {
 
     public static <T> Comparator<T> classFieldsSort(Class<T> clas, int fieldNumber) {
         if (clas == User.class) {
@@ -17,7 +17,7 @@ public class ComparatorFactory {
         throw new IllegalArgumentException("Неизвестный класс: " + clas.getName());
     }
 
-    public static <T> Comparator<T> userFieldsSort( int fieldNumber) {
+    public static <T> Comparator<T> userFieldsSort(int fieldNumber) {
         return switch (fieldNumber) {
             case 1 -> (Comparator<T>) new UserNameComparator();
             case 2 -> (Comparator<T>) new EmailComparator();
