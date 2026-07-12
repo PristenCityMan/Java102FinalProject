@@ -1,7 +1,9 @@
 package ru.aston.homework_05.sort;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 public class MergeSort {
 
@@ -46,6 +48,34 @@ public class MergeSort {
         }
         while (j < n2) {
             list.set(k++, R[j++]);
+        }
+    }
+
+    public static <T> void sortEvenByIndices(List<T> list, ToIntFunction<T> extractor, Comparator<T> comparator) {
+        if (list == null) {
+            System.out.println("Массив пустой. Заполните массив данными");
+            return;
+        } else if (list.size() < 2) {
+            System.out.println("Массив состоит из 1 элемента, сортировка не требуется");
+            return;
+        }
+        List<Integer> indices = new ArrayList<>();
+        List<T> elements = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            T item = list.get(i);
+            int value = extractor.applyAsInt(item);
+            if (value % 2 == 0) {
+                indices.add(i);
+                elements.add(item);
+            }
+        }
+        if (elements.size() < 2) {
+            return;
+        }
+        MergeSort.sort(elements, comparator);
+        for (int j = 0; j < indices.size(); j++) {
+            list.set(indices.get(j), elements.get(j));
         }
     }
 }
