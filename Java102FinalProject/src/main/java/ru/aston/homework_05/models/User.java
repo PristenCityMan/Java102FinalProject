@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Base64;
+import java.util.Optional;
 
 public class User extends BaseClassImpl {
     private final String name;
@@ -67,8 +68,8 @@ public class User extends BaseClassImpl {
             return this;
         }
 
-        public Builder addPassword() {
-            this.password = Base64.getEncoder().encodeToString(name.getBytes());
+        public Builder addPassword(Optional<String> password) {
+            this.password = password.orElseGet(() -> Base64.getEncoder().encodeToString(name.getBytes()));
             return this;
         }
 
