@@ -11,12 +11,12 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DialogTest {
-    private final InputStream originalSystemIn = System.in;
     private final PrintStream originalSystemOut = System.out;
     private ByteArrayOutputStream outContent;
 
@@ -28,7 +28,6 @@ class DialogTest {
 
     @AfterEach
     void restoreStreams() {
-        System.setIn(originalSystemIn);
         System.setOut(originalSystemOut);
     }
 
@@ -36,8 +35,8 @@ class DialogTest {
     void testAnswerTaker_ValidInputWithoutList() {
         String message = "Сообщение";
         String simulatedInput = "2\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        int result = Dialog.answerTaker(message);
+        Scanner scanner = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        int result = Dialog.answerTaker(message, scanner);
         assertEquals(2, result);
     }
 
@@ -46,8 +45,8 @@ class DialogTest {
         List<Integer> validAnswers = Arrays.asList(1, 3, 5, 7);
         String message = "Сообщение";
         String simulatedInput = "2\nab\n5\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-        int result = Dialog.answerTaker(message, validAnswers);
+        Scanner scanner = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+        int result = Dialog.answerTaker(message, validAnswers, scanner);
         assertEquals(5, result);
         String output = outContent.toString();
         assertTrue(output.contains("Некорректные данные. Повторите ввод."));
