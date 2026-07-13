@@ -28,6 +28,7 @@ public class Dialog {
     private static final String EXIT_TEXT = "Для выхода из программы выберете 0, для повторения работы любое другое число.";
     private static final String STANDARD_SORT = "Стандартный";
     private static final String SORT_EVEN = "Сортировка только чётных значений";
+    private static final String EMPTY_LIST = "Список пуст. Возврат к началу.";
     private static final List<Integer> VALID_LIST3 = Arrays.asList(1, 2, 3);
     private static final List<Integer> VALID_LIST2 = Arrays.asList(1, 2);
 
@@ -45,8 +46,16 @@ public class Dialog {
             List<WorkSpace> workSpaces = new ArrayList<>();
             if (classType == 1) {
                 users = get1stClassCollection(typeFilling, length);
+                if (users==null || users.isEmpty()){
+                    System.out.println(EMPTY_LIST);
+                    continue;
+                }
             } else {
                 workSpaces = get2ndClassCollection(typeFilling, length);
+                if (workSpaces==null || workSpaces.isEmpty()){
+                    System.out.println(EMPTY_LIST);
+                    continue;
+                }
             }
 
             int field = answerTaker("""
@@ -111,7 +120,7 @@ public class Dialog {
         BaseCollectionGenerator<User> generator = null;
         switch (fillType) {
             case 1 -> generator = new FileCollector<>(
-                    "%s%ss.json".formatted(FILES_DIRECTORY, classSimpleName.toLowerCase()), User.class);
+                    "%s%ss.json".formatted(FILES_DIRECTORY, classSimpleName.toLowerCase()), User.class, size);
             case 2 -> generator = new RandomCollector<>(size, classSimpleName);
             case 3 -> generator = new ConsoleCollector<>(size, classSimpleName);
         }
@@ -125,8 +134,8 @@ public class Dialog {
         BaseCollectionGenerator<WorkSpace> generator = null;
         switch (fillType) {
             case 1 -> generator = new FileCollector<>(
-                    "%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()), WorkSpace.class);
-            case 2 -> generator = new RandomCollector<>(size, className);
+                    "%s%ss.json".formatted(FILES_DIRECTORY, className.toLowerCase()), WorkSpace.class, size);
+            case 2 -> generator = new RandomCollector<>(size,className);
             case 3 -> generator = new ConsoleCollector<>(size, className);
         }
 
