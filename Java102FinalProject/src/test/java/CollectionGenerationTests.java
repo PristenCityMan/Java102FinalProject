@@ -18,8 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CollectionGenerationTests {
     @Test
     void whenDeserializeUsers_givenValidJsonFile_thenCollectionItemNameNotEmpty() {
-        String fileName = "src/main/resources/users.json";
-        BaseCollectionGenerator<User> placeholder = new FileCollector<>(fileName, User.class);
+        String fileName = "src/test/resources/users.json";
+        int size = 5;
+        BaseCollectionGenerator<User> placeholder = new FileCollector<>(fileName, User.class, size);
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<User> collection = collectionGeneratorClient.get();
         assertFalse(Objects.requireNonNull(collection.stream().findAny().orElse(null)).getName().isEmpty());
@@ -28,7 +29,8 @@ public class CollectionGenerationTests {
     @Test
     void whenDeserializingToList_noFileCollector_thenReturnEmptyCollection() {
         String fileName = "";
-        BaseCollectionGenerator<BaseClass> placeholder = new FileCollector<>(fileName, BaseClass.class);
+        int size = 5;
+        BaseCollectionGenerator<BaseClass> placeholder = new FileCollector<>(fileName, BaseClass.class, size);
         CollectionGeneratorClient<BaseClass> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<BaseClass> collection = collectionGeneratorClient.get();
         assertTrue(collection.isEmpty());
@@ -36,8 +38,9 @@ public class CollectionGenerationTests {
 
     @Test
     void whenDeserializeWorkspaces_givenValidJsonFile_thenCollectionItemNameNotEmpty() {
-        String fileName = "src/main/resources/workspaces.json";
-        BaseCollectionGenerator<WorkSpace> placeholder = new FileCollector<>(fileName, WorkSpace.class);
+        String fileName = "src/test/resources/workspaces.json";
+        int size = 5;
+        BaseCollectionGenerator<WorkSpace> placeholder = new FileCollector<>(fileName, WorkSpace.class, size);
         CollectionGeneratorClient<WorkSpace> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<WorkSpace> collection = collectionGeneratorClient.get();
         assertFalse(Objects.requireNonNull(collection.stream().findAny().orElse(null)).getName().isEmpty());

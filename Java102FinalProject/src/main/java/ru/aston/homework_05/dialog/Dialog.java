@@ -38,13 +38,14 @@ public class Dialog {
 
     public static void dialog() {
         System.out.println("Вас приветствует программа сортировки классов.\n " + "Выбирайте вариант из предложенных.");
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             int classType = answerTaker("""
                     Выберите класс:
                     1: %s
-                    2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2);
-            int typeFilling = answerTaker(TYPE_FILLING_TEXT, VALID_LIST3);
-            int length = answerTaker(LENGTH_TEXT);
+                    2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2, scanner);
+            int typeFilling = answerTaker(TYPE_FILLING_TEXT, VALID_LIST3, scanner);
+            int length = answerTaker(LENGTH_TEXT, scanner);
 
             List<User> users = new ArrayList<>();
             List<WorkSpace> workSpaces = new ArrayList<>();
@@ -68,30 +69,30 @@ public class Dialog {
                     2: %s
                     3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
                     classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
-                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()), VALID_LIST3);
+                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()), VALID_LIST3, scanner);
 
             switch (classType) {
                 case 1:
                     sortAndPrint(users, User.class, field, "Users");
                     break;
                 case 2:
-                    workSpaceSort(field, workSpaces);
+                    workSpaceSort(field, workSpaces, scanner);
                     break;
                 default:
                     System.out.println("Ошибка: Выбран неверный модуль");
                     continue;
             }
 
-            if (answerTaker(EXIT_TEXT) == 0) {
+            if (answerTaker(EXIT_TEXT, scanner) == 0) {
+                scanner.close();
                 break;
             }
         }
     }
 
-    public static int answerTaker(String message, List<Integer> validAnswer) {
+    public static int answerTaker(String message, List<Integer> validAnswer, Scanner scanner) {
         System.out.println(message);
         int choice;
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
@@ -105,10 +106,9 @@ public class Dialog {
         }
     }
 
-    public static int answerTaker(String message) {
+    public static int answerTaker(String message, Scanner scanner) {
         System.out.println(message);
         int choice;
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
@@ -187,7 +187,7 @@ public class Dialog {
         }
     }
 
-    private static void workSpaceSort(int field, List<WorkSpace> workSpaces) {
+    private static void workSpaceSort(int field, List<WorkSpace> workSpaces, Scanner scanner) {
         if (workSpaces == null || workSpaces.isEmpty()) {
             System.out.println("Ошибка: Массив пустой. Запонлите массив");
             return;
@@ -199,7 +199,8 @@ public class Dialog {
         int sortChoice = answerTaker("""
                 Выберите режим сортировки для числового поля:
                 1: %s
-                2: %s""".formatted(STANDARD_SORT, SORT_EVEN));
+                2: %s""".formatted(STANDARD_SORT, SORT_EVEN), scanner);
+
         if (sortChoice == 1) {
             sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
         } else {

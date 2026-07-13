@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
-    protected final int size;
     protected final String type;
 
     public RandomCollector(int size, String type) {
@@ -27,7 +26,7 @@ public class RandomCollector<T extends BaseClass> extends BaseCollectionGenerato
                 return (T) User.Builder.builder()
                         .addName(name)
                         .addEmail(faker.internet().emailAddress())
-                        .addPassword()
+                        .addPassword(java.util.Optional.empty())
                         .build();
             } else if (type.equals(WorkSpace.getClassName())) {
                 return (T) WorkSpace.Builder.builder()

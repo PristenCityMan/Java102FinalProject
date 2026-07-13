@@ -3,25 +3,41 @@ package ru.aston.homework_05.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.Contract;
+import ru.aston.homework_05.validators.EmailValidationHandler;
+import ru.aston.homework_05.validators.UserValidationHandler;
+import ru.aston.homework_05.validators.UsernameValidationHandler;
 
 import java.util.Base64;
+import java.util.Optional;
 
 public class User extends BaseClassImpl {
     private final String name;
     private final String email;
     private String password;
+    private UserValidationHandler validationHandler;
 
     @Contract(pure = true)
     @JsonCreator
     public User(@JsonProperty("name") String name, @JsonProperty("email") String email) {
         this.name = name;
         this.email = email;
+        setValidators();
+        validationHandler.validate(this);
     }
 
-    private User(Builder builder) {
+    private void setValidators() {
+        validationHandler = new UsernameValidationHandler();
+        validationHandler.setNext(new EmailValidationHandler());
+    }
+
+    private User(Builder builder, boolean shouldValidate) {
         name = builder.name;
         email = builder.email;
         password = builder.password;
+        if (shouldValidate) {
+            setValidators();
+            validationHandler.validate(this);
+        }
     }
 
     public String getName() {
@@ -61,14 +77,15 @@ public class User extends BaseClassImpl {
         private String name;
         private String email;
         private String password;
+        private boolean shouldValidate = true;
 
         public Builder addName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder addPassword() {
-            this.password = Base64.getEncoder().encodeToString(name.getBytes());
+        public Builder addPassword(Optional<String> password) {
+            this.password = password.orElseGet(() -> Base64.getEncoder().encodeToString(name.getBytes()));
             return this;
         }
 
@@ -77,8 +94,13 @@ public class User extends BaseClassImpl {
             return this;
         }
 
+        public Builder disableValidation() {
+            shouldValidate = false;
+            return this;
+        }
+
         public User build() {
-            return new User(this);
+            return new User(this, shouldValidate);
         }
 
         public static Builder builder() {
