@@ -29,12 +29,14 @@ public class User extends BaseClassImpl {
         validationHandler.setNext(new EmailValidationHandler());
     }
 
-    private User(Builder builder) {
+    private User(Builder builder, boolean shouldValidate) {
         name = builder.name;
         email = builder.email;
         password = builder.password;
-        setValidators();
-        validationHandler.validate(this);
+        if (shouldValidate) {
+            setValidators();
+            validationHandler.validate(this);
+        }
     }
 
     public String getName() {
@@ -74,6 +76,7 @@ public class User extends BaseClassImpl {
         private String name;
         private String email;
         private String password;
+        private boolean shouldValidate = true;
 
         public Builder addName(String name) {
             this.name = name;
@@ -90,8 +93,13 @@ public class User extends BaseClassImpl {
             return this;
         }
 
+        public Builder disableValidation() {
+            shouldValidate = false;
+            return this;
+        }
+
         public User build() {
-            return new User(this);
+            return new User(this, shouldValidate);
         }
 
         public static Builder builder() {

@@ -29,7 +29,7 @@ public class ConsoleGenerationTests {
 
     @Test
     void when_givenUserName_thenReturnUserWithThatName() {
-        String name = faker.name().fullName();
+        String name = "Hassan Pacocha";
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Mockito.when(collectionGeneratorClient.get())
                 .thenReturn(List.of(new User(name, faker.internet().emailAddress())));

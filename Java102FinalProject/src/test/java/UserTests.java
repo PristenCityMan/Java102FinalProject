@@ -11,7 +11,7 @@ public class UserTests {
     void when_givenValidUserEmail_thenUserHasAnEmail() {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
-        User user = new User("Joe Dohn", email);
+        User user = new User("Joe Doe", email);
         assertEquals(email, user.getEmail());
     }
 

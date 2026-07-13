@@ -33,9 +33,9 @@ public class ComparatorStrategyTests {
 
     @Test
     void test_UserNameComparatorShouldCompareByName() {
-        User user1 = new User.Builder().addName("Liza").build();
-        User user2 = new User.Builder().addName("Rob").build();
-        User user3 = new User.Builder().addName("Liza").build();
+        User user1 = new User.Builder().addName("Liza").disableValidation().build();
+        User user2 = new User.Builder().addName("Rob").disableValidation().build();
+        User user3 = new User.Builder().addName("Liza").disableValidation().build();
         UserNameComparator c = new UserNameComparator();
         assertTrue(c.compare(user1, user2) < 0);
         assertTrue(c.compare(user2, user1) > 0);

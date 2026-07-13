@@ -9,7 +9,7 @@ public class UsernameValidationHandler extends UserValidationHandler {
             throw new ValidationException("User name cannot be empty");
         }
 
-        if (!user.getName().matches("^[A-Za-z]+(?:[ '-][A-Za-z]+)*$")) {
+        if (!user.getName().matches("^[A-Za-zА-Яа-я]+(?:[ '-][A-Za-zА-Яа-я]+)*$")) {
             throw new ValidationException("Invalid user format");
         }
 
