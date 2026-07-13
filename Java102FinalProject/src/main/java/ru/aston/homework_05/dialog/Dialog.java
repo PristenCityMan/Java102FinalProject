@@ -81,6 +81,7 @@ public class Dialog {
             }
 
             if (answerTaker(EXIT_TEXT, scanner) == 0) {
+                scanner.close();
                 break;
             }
         }
