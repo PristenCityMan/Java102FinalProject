@@ -7,6 +7,7 @@ import ru.aston.homework_05.validators.ValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ConsoleCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
@@ -27,37 +28,43 @@ public class ConsoleCollector<T extends BaseClass> extends BaseCollectionGenerat
                 String name = in.nextLine();
                 System.out.printf("%s: ", User.getSecondFieldName());
                 String email = in.nextLine();
-                try {
-                    collection.add((T) User.Builder.builder()
-                            .addName(name.trim())
-                            .addEmail(email)
-                            .addPassword()
-                            .build());
-                } catch (ValidationException validationException) {
-                    System.out.println("Некорректные данные. Повторите ввод, пожалуйста.");
-                }
+                System.out.printf("%s: ", User.getThirdFieldName());
+                String password = in.nextLine();
+                collection.add((T) User.Builder.builder()
+                        .addName(name.trim())
+                        .addEmail(email)
+                        .addPassword(Optional.of(password))
+                        .build());
             } else if (type.equals(WorkSpace.getClassName())) {
                 System.out.printf("%s: ", WorkSpace.getFirstFieldName());
                 String name = in.nextLine();
-                System.out.printf("%s: ", WorkSpace.getSecondFieldName());
                 var workspaceBuilder = WorkSpace.Builder.builder().addName(name);
-                try {
-                    int space = Integer.parseInt(in.nextLine());
-                    workspaceBuilder.addSpace(space);
-                    System.out.printf("%s: ", WorkSpace.getThirdFieldName());
-                    int seat = Integer.parseInt(in.nextLine());
-                    workspaceBuilder.addSeat(seat);
-                } catch (NumberFormatException e) {
-                    System.out.println("Некорректные данные. Повторите ввод, пожалуйста.");
-                } finally {
-                    var workSpace = workspaceBuilder.build();
-                    if (workSpace != null) {
-                        collection.add((T) workSpace);
+                do {
+                    try {
+                        System.out.printf("%s: ", WorkSpace.getSecondFieldName());
+                        workspaceBuilder.addSpace(Integer.parseInt(in.nextLine()));
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Некорректные данные. Повторите ввод, пожалуйста.");
                     }
+                } while (true);
+
+                do {
+                    try {
+                        System.out.printf("%s: ", WorkSpace.getThirdFieldName());
+                        workspaceBuilder.addSeat(Integer.parseInt(in.nextLine()));
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Некорректные данные. Повторите ввод, пожалуйста.");
+                    }
+                } while (true);
+
+                var workSpace = workspaceBuilder.build();
+                if (workSpace != null) {
+                    collection.add((T) workSpace);
                 }
             }
         }
-        in.close();
         return collection;
     }
 }

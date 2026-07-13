@@ -26,7 +26,7 @@ public class RandomCollector<T extends BaseClass> extends BaseCollectionGenerato
                 return (T) User.Builder.builder()
                         .addName(name)
                         .addEmail(faker.internet().emailAddress())
-                        .addPassword()
+                        .addPassword(java.util.Optional.empty())
                         .build();
             } else if (type.equals(WorkSpace.getClassName())) {
                 return (T) WorkSpace.Builder.builder()

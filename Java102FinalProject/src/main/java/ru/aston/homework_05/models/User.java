@@ -8,6 +8,7 @@ import ru.aston.homework_05.validators.UserValidationHandler;
 import ru.aston.homework_05.validators.UsernameValidationHandler;
 
 import java.util.Base64;
+import java.util.Optional;
 
 public class User extends BaseClassImpl {
     private final String name;
@@ -83,8 +84,8 @@ public class User extends BaseClassImpl {
             return this;
         }
 
-        public Builder addPassword() {
-            this.password = Base64.getEncoder().encodeToString(name.getBytes());
+        public Builder addPassword(Optional<String> password) {
+            this.password = password.orElseGet(() -> Base64.getEncoder().encodeToString(name.getBytes()));
             return this;
         }
 
