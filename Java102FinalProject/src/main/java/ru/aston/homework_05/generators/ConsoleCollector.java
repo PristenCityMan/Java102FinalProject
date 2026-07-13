@@ -3,15 +3,19 @@ package ru.aston.homework_05.generators;
 import ru.aston.homework_05.models.BaseClass;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
+import ru.aston.homework_05.validators.ValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class ConsoleCollector<T extends BaseClass> extends RandomCollector<T> {
+public class ConsoleCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
+    protected final String type;
+
     public ConsoleCollector(int size, String type) {
-        super(size, type);
+        this.size = size;
+        this.type = type;
     }
 
     @Override

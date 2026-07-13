@@ -28,14 +28,15 @@ public class ConsoleGenerationTests {
     }
 
     @Test
-    void when_CollectorName_thenReturnCollectionWithName() {
-        String name = faker.name().fullName();
+    void when_givenUserName_thenReturnUserWithThatName() {
+        String name = "Hassan Pacocha";
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
-        Mockito.when(collectionGeneratorClient.get()).thenReturn(List.of(User.Builder.builder().addName(name).build()));
+        Mockito.when(collectionGeneratorClient.get())
+                .thenReturn(List.of(new User(name, faker.internet().emailAddress())));
         Collection<User> collection = collectionGeneratorClient.get();
         String actualName = collection.stream()
                 .map(User::getName)
-                .findFirst()
+                .findAny()
                 .orElse(null);
         assertEquals(name, actualName);
     }
