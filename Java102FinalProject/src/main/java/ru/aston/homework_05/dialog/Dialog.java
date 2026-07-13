@@ -103,10 +103,9 @@ public class Dialog {
         }
     }
 
-    public static <scanner> int answerTaker(String message, Scanner scanner) {
+    public static int answerTaker(String message, Scanner scanner) {
         System.out.println(message);
         int choice;
-       // Scanner scanner = new Scanner(System.in);
         while (true) {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
