@@ -167,7 +167,7 @@ public class Dialog {
         }
     }
 
-    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor, String className, Scanner scanner) {
+    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor, Scanner scanner) {
         if (list == null || list.isEmpty()) {
             System.out.println("Список пуст, сортировка невозможна.");
             return;
@@ -178,7 +178,7 @@ public class Dialog {
             System.out.println("Сортировка только четных чисел завершенна:");
             list.forEach(System.out::println);
             try {
-                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas, scanner);
+                offerSave(list, "sorted_workspaces.json", clas, scanner);
             } catch (IOException e) {
                 System.out.println("Ошибка: При записи в файл возникла ошибка: " + e.getMessage());
             }
@@ -204,7 +204,7 @@ public class Dialog {
         if (sortChoice == 1) {
             sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места", scanner);
         } else {
-            ToIntFunction<WorkSpace> extractor = null;
+            ToIntFunction<WorkSpace> extractor;
             if (field == 2) {
                 extractor = WorkSpace::getSpace;
             } else if (field == 3) {
@@ -213,7 +213,7 @@ public class Dialog {
                 System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
                 return;
             }
-            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces", scanner);
+            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, scanner);
         }
     }
 
@@ -224,11 +224,10 @@ public class Dialog {
                 2. Нет
                 """, scanner);
         if (choice == 1) {
-            String fullPath = "Java102FinalProject/src/main/resources/" + defaultFileName;
+            String fullPath = FILES_DIRECTORY + defaultFileName;
             ObjectMapper objectMapper = new ObjectMapper();
             JsonFileSaver saver = new JsonFileSaver(objectMapper);
             saver.saveToFile(fullPath, data, elementType);
         }
-        return;
     }
 }
