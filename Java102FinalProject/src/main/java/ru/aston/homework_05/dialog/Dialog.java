@@ -200,17 +200,20 @@ public class Dialog {
                 Выберите режим сортировки для числового поля:
                 1: %s
                 2: %s""".formatted(STANDARD_SORT, SORT_EVEN));
-
-        ToIntFunction<WorkSpace> extractor = null;
-        if (field == 2) {
-            extractor = WorkSpace::getSpace;
-        } else if (field == 3) {
-            extractor = WorkSpace::getSeat;
+        if (sortChoice == 1) {
+            sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
         } else {
-            System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
-            return;
+            ToIntFunction<WorkSpace> extractor = null;
+            if (field == 2) {
+                extractor = WorkSpace::getSpace;
+            } else if (field == 3) {
+                extractor = WorkSpace::getSeat;
+            } else {
+                System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
+                return;
+            }
+            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces");
         }
-        sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces");
     }
 
     public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType) throws IOException {
@@ -227,7 +230,4 @@ public class Dialog {
         }
         return;
     }
-
-    private static final String FILES_DIRECTORY = "src/main/resources/";
-
 }
