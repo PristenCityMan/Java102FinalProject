@@ -1,7 +1,502 @@
 [
   {
-    "name": "БЦ Клевер",
+    "name": "Hometown",
+    "space": 734,
+    "seat": 8
+  },
+  {
+    "name": "Geeknet",
+    "space": 512,
+    "seat": 39
+  },
+  {
+    "name": "Isosure",
+    "space": 525,
+    "seat": 81
+  },
+  {
+    "name": "Songlines",
+    "space": 204,
+    "seat": 99
+  },
+  {
+    "name": "Solaren",
+    "space": 897,
+    "seat": 50
+  },
+  {
+    "name": "Genesynk",
+    "space": 722,
+    "seat": 64
+  },
+  {
+    "name": "Caxt",
+    "space": 499,
+    "seat": 18
+  },
+  {
+    "name": "Duflex",
+    "space": 559,
+    "seat": 72
+  },
+  {
+    "name": "Valpreal",
+    "space": 12,
+    "seat": 14
+  },
+  {
+    "name": "Pyramia",
+    "space": 449,
+    "seat": 65
+  },
+  {
+    "name": "Veraq",
+    "space": 52,
+    "seat": 53
+  },
+  {
+    "name": "Kangle",
+    "space": 532,
+    "seat": 75
+  },
+  {
+    "name": "Plexia",
+    "space": 429,
+    "seat": 29
+  },
+  {
+    "name": "Animalia",
+    "space": 878,
+    "seat": 71
+  },
+  {
+    "name": "Updat",
+    "space": 676,
+    "seat": 7
+  },
+  {
+    "name": "Emtrac",
+    "space": 84,
+    "seat": 4
+  },
+  {
+    "name": "Insuron",
+    "space": 448,
+    "seat": 45
+  },
+  {
+    "name": "Magneato",
+    "space": 545,
+    "seat": 51
+  },
+  {
+    "name": "Accruex",
+    "space": 175,
+    "seat": 46
+  },
+  {
+    "name": "Zidox",
+    "space": 905,
+    "seat": 73
+  },
+  {
+    "name": "Remotion",
+    "space": 957,
+    "seat": 52
+  },
+  {
+    "name": "Gushkool",
+    "space": 431,
+    "seat": 22
+  },
+  {
+    "name": "Eargo",
+    "space": 111,
+    "seat": 69
+  },
+  {
+    "name": "Exoblue",
+    "space": 979,
+    "seat": 17
+  },
+  {
+    "name": "Trasola",
+    "space": 299,
+    "seat": 76
+  },
+  {
+    "name": "Octocore",
+    "space": 15,
+    "seat": 65
+  },
+  {
+    "name": "Emtrak",
+    "space": 932,
+    "seat": 82
+  },
+  {
+    "name": "Myopium",
+    "space": 856,
+    "seat": 10
+  },
+  {
+    "name": "Cosmetex",
+    "space": 646,
+    "seat": 76
+  },
+  {
+    "name": "Eclipsent",
+    "space": 591,
+    "seat": 36
+  },
+  {
+    "name": "Zytrax",
+    "space": 244,
+    "seat": 28
+  },
+  {
+    "name": "Housedown",
+    "space": 68,
+    "seat": 90
+  },
+  {
+    "name": "Dentrex",
+    "space": 528,
+    "seat": 71
+  },
+  {
+    "name": "Avenetro",
+    "space": 863,
+    "seat": 35
+  },
+  {
+    "name": "Twiggery",
+    "space": 725,
+    "seat": 44
+  },
+  {
+    "name": "Extragene",
+    "space": 237,
+    "seat": 94
+  },
+  {
+    "name": "Zedalis",
+    "space": 541,
+    "seat": 52
+  },
+  {
+    "name": "Zomboid",
+    "space": 954,
+    "seat": 54
+  },
+  {
+    "name": "Polarium",
+    "space": 393,
+    "seat": 60
+  },
+  {
+    "name": "Kengen",
+    "space": 779,
+    "seat": 71
+  },
+  {
+    "name": "Biotica",
+    "space": 794,
+    "seat": 76
+  },
+  {
+    "name": "Decratex",
+    "space": 412,
+    "seat": 29
+  },
+  {
+    "name": "Zosis",
+    "space": 61,
+    "seat": 3
+  },
+  {
+    "name": "Stockpost",
+    "space": 708,
+    "seat": 28
+  },
+  {
+    "name": "Ecolight",
+    "space": 447,
+    "seat": 68
+  },
+  {
+    "name": "Techtrix",
+    "space": 469,
+    "seat": 69
+  },
+  {
+    "name": "Isoswitch",
+    "space": 961,
+    "seat": 19
+  },
+  {
+    "name": "Extremo",
+    "space": 306,
+    "seat": 49
+  },
+  {
+    "name": "Yogasm",
+    "space": 837,
+    "seat": 45
+  },
+  {
+    "name": "Zilla",
+    "space": 666,
+    "seat": 84
+  },
+  {
+    "name": "Xanide",
+    "space": 676,
+    "seat": 27
+  },
+  {
+    "name": "Accupharm",
+    "space": 691,
+    "seat": 43
+  },
+  {
+    "name": "Zanymax",
+    "space": 605,
+    "seat": 23
+  },
+  {
+    "name": "Zoxy",
+    "space": 217,
+    "seat": 88
+  },
+  {
+    "name": "Quiltigen",
+    "space": 953,
+    "seat": 67
+  },
+  {
+    "name": "Eternis",
+    "space": 530,
+    "seat": 59
+  },
+  {
+    "name": "Kidgrease",
+    "space": 311,
+    "seat": 72
+  },
+  {
+    "name": "Proxsoft",
+    "space": 713,
+    "seat": 33
+  },
+  {
+    "name": "Cinaster",
+    "space": 372,
+    "seat": 40
+  },
+  {
+    "name": "Neurocell",
+    "space": 974,
+    "seat": 50
+  },
+  {
+    "name": "Genmy",
+    "space": 743,
+    "seat": 75
+  },
+  {
+    "name": "Kyagoro",
+    "space": 127,
+    "seat": 16
+  },
+  {
+    "name": "Junipoor",
+    "space": 167,
+    "seat": 79
+  },
+  {
+    "name": "Goko",
+    "space": 278,
+    "seat": 96
+  },
+  {
+    "name": "Bleeko",
     "space": 13,
-    "seat": 666
+    "seat": 54
+  },
+  {
+    "name": "Corporana",
+    "space": 128,
+    "seat": 87
+  },
+  {
+    "name": "Apextri",
+    "space": 208,
+    "seat": 16
+  },
+  {
+    "name": "Vetron",
+    "space": 184,
+    "seat": 21
+  },
+  {
+    "name": "Electonic",
+    "space": 320,
+    "seat": 94
+  },
+  {
+    "name": "Viagrand",
+    "space": 920,
+    "seat": 47
+  },
+  {
+    "name": "Verton",
+    "space": 703,
+    "seat": 42
+  },
+  {
+    "name": "Zeam",
+    "space": 948,
+    "seat": 90
+  },
+  {
+    "name": "Ovolo",
+    "space": 957,
+    "seat": 24
+  },
+  {
+    "name": "Flexigen",
+    "space": 789,
+    "seat": 59
+  },
+  {
+    "name": "Ronelon",
+    "space": 604,
+    "seat": 45
+  },
+  {
+    "name": "Newcube",
+    "space": 386,
+    "seat": 90
+  },
+  {
+    "name": "Webiotic",
+    "space": 488,
+    "seat": 62
+  },
+  {
+    "name": "Ceprene",
+    "space": 349,
+    "seat": 77
+  },
+  {
+    "name": "Nexgene",
+    "space": 651,
+    "seat": 71
+  },
+  {
+    "name": "Capscreen",
+    "space": 484,
+    "seat": 91
+  },
+  {
+    "name": "Edecine",
+    "space": 269,
+    "seat": 71
+  },
+  {
+    "name": "Centice",
+    "space": 6,
+    "seat": 58
+  },
+  {
+    "name": "Recrisys",
+    "space": 765,
+    "seat": 85
+  },
+  {
+    "name": "Renovize",
+    "space": 847,
+    "seat": 97
+  },
+  {
+    "name": "Dadabase",
+    "space": 312,
+    "seat": 68
+  },
+  {
+    "name": "Exiand",
+    "space": 674,
+    "seat": 14
+  },
+  {
+    "name": "Tropoli",
+    "space": 190,
+    "seat": 51
+  },
+  {
+    "name": "Wrapture",
+    "space": 224,
+    "seat": 81
+  },
+  {
+    "name": "Diginetic",
+    "space": 329,
+    "seat": 37
+  },
+  {
+    "name": "Entropix",
+    "space": 100,
+    "seat": 88
+  },
+  {
+    "name": "Beadzza",
+    "space": 522,
+    "seat": 63
+  },
+  {
+    "name": "Dancerity",
+    "space": 839,
+    "seat": 68
+  },
+  {
+    "name": "Flyboyz",
+    "space": 229,
+    "seat": 37
+  },
+  {
+    "name": "Zillactic",
+    "space": 4,
+    "seat": 77
+  },
+  {
+    "name": "Portaline",
+    "space": 787,
+    "seat": 30
+  },
+  {
+    "name": "Aquacine",
+    "space": 142,
+    "seat": 91
+  },
+  {
+    "name": "Twiist",
+    "space": 814,
+    "seat": 18
+  },
+  {
+    "name": "Sealoud",
+    "space": 245,
+    "seat": 75
+  },
+  {
+    "name": "Brainclip",
+    "space": 896,
+    "seat": 8
+  },
+  {
+    "name": "Navir",
+    "space": 251,
+    "seat": 16
   }
 ]
