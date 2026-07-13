@@ -31,6 +31,7 @@ public class Dialog {
     private static final String EMPTY_LIST = "Список пуст. Возврат к началу.";
     private static final List<Integer> VALID_LIST3 = Arrays.asList(1, 2, 3);
     private static final List<Integer> VALID_LIST2 = Arrays.asList(1, 2);
+    private static final String FILES_DIRECTORY = "src/main/resources/";
 
     public static void dialog() {
         System.out.println("Вас приветствует программа сортировки классов.\n " + "Выбирайте вариант из предложенных.");
@@ -204,4 +205,5 @@ public class Dialog {
     }
 
     private static final String FILES_DIRECTORY = "src/main/resources/";
+
 }
