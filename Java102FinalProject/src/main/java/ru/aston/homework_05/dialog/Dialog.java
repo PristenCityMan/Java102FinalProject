@@ -1,11 +1,13 @@
 package ru.aston.homework_05.dialog;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.aston.homework_05.generators.BaseCollectionGenerator;
 import ru.aston.homework_05.generators.CollectionGeneratorClient;
 import ru.aston.homework_05.generators.ConsoleCollector;
@@ -13,6 +15,7 @@ import ru.aston.homework_05.generators.FileCollector;
 import ru.aston.homework_05.generators.RandomCollector;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
+import ru.aston.homework_05.output.JsonFileSaver;
 import ru.aston.homework_05.sort.ComparatorStrategy;
 import ru.aston.homework_05.sort.MergeSort;
 
@@ -59,7 +62,7 @@ public class Dialog {
 
             switch (classType) {
                 case 1:
-                    sortAndPrint(users, User.class, field, "Пользователи");
+                    sortAndPrint(users, User.class, field, "Users");
                     break;
                 case 2:
                     workSpaceSort(field, workSpaces);
@@ -144,12 +147,17 @@ public class Dialog {
             MergeSort.sort(list, comparator);
             System.out.println("Сортировка завершена:");
             list.forEach(System.out::println);
+            try {
+                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas);
+            } catch (IOException e) {
+                System.out.println("Ошибка: При записи в файл возникла ошибка: " + e.getMessage());
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
 
-    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor) {
+    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor, String className) {
         if (list == null || list.isEmpty()) {
             System.out.println("Список пуст, сортировка невозможна.");
             return;
@@ -159,6 +167,11 @@ public class Dialog {
             MergeSort.sortEvenByIndices(list, extractor, comparator);
             System.out.println("Сортировка только четных чисел завершенна:");
             list.forEach(System.out::println);
+            try {
+                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas);
+            } catch (IOException e) {
+                System.out.println("Ошибка: При записи в файл возникла ошибка: " + e.getMessage());
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
@@ -170,7 +183,7 @@ public class Dialog {
             return;
         }
         if (field == 1) {
-            sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
+            sortAndPrint(workSpaces, WorkSpace.class, field, "WorkSpaces");
             return;
         }
         int sortChoice = answerTaker("""
@@ -178,20 +191,31 @@ public class Dialog {
                 1: %s
                 2: %s""".formatted(STANDARD_SORT, SORT_EVEN));
 
-        if (sortChoice == 1) {
-            sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
+        ToIntFunction<WorkSpace> extractor = null;
+        if (field == 2) {
+            extractor = WorkSpace::getSpace;
+        } else if (field == 3) {
+            extractor = WorkSpace::getSeat;
         } else {
-            ToIntFunction<WorkSpace> extractor = null;
-            if (field == 2) {
-                extractor = WorkSpace::getSpace;
-            } else if (field == 3) {
-                extractor = WorkSpace::getSeat;
-            } else {
-                System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
-                return;
-            }
-            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor);
+            System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
+            return;
         }
+        sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces");
+    }
+
+    public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType) throws IOException {
+        int choice = answerTaker("""
+                Сохранить отсортированный массив в файл?
+                1. Да
+                2. Нет
+                """);
+        if (choice == 1) {
+            String fullPath = "Java102FinalProject/src/main/resources/" + defaultFileName;
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonFileSaver saver = new JsonFileSaver(objectMapper);
+            saver.saveToFile(fullPath, data, elementType);
+        }
+        return;
     }
 
     private static final String FILES_DIRECTORY = "src/main/resources/";
