@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Contract;
 import ru.aston.homework_05.validators.EmailValidationHandler;
 import ru.aston.homework_05.validators.UserValidationHandler;
 import ru.aston.homework_05.validators.UsernameValidationHandler;
+import ru.aston.homework_05.validators.ValidationException;
 
 import java.util.Base64;
 import java.util.Optional;
@@ -22,7 +23,11 @@ public class User extends BaseClassImpl {
         this.name = name;
         this.email = email;
         setValidators();
-        validationHandler.validate(this);
+        try {
+            validationHandler.validate(this);
+        } catch (ValidationException e) {
+            System.out.println("Ошибка валидации, " + this);
+        }
     }
 
     private void setValidators() {
@@ -36,7 +41,11 @@ public class User extends BaseClassImpl {
         password = builder.password;
         if (shouldValidate) {
             setValidators();
-            validationHandler.validate(this);
+            try {
+                validationHandler.validate(this);
+            } catch (ValidationException e) {
+                System.out.println("Ошибка валидации, " + this);
+            }
         }
     }
 
