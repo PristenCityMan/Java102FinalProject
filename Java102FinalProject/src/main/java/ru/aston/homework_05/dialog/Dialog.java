@@ -73,7 +73,7 @@ public class Dialog {
 
             switch (classType) {
                 case 1:
-                    sortAndPrint(users, User.class, field, "Users");
+                    sortAndPrint(users, User.class, field, "Users", scanner);
                     break;
                 case 2:
                     workSpaceSort(field, workSpaces, scanner);
@@ -147,7 +147,7 @@ public class Dialog {
         return client.get();
     }
 
-    private static <T> void sortAndPrint(List<T> list, Class<T> clas, int choice, String className) {
+    private static <T> void sortAndPrint(List<T> list, Class<T> clas, int choice, String className, Scanner scanner) {
         if (list == null || list.isEmpty()) {
             System.out.println("Ошибка: Список " + className + " пуст");
             return;
@@ -158,7 +158,7 @@ public class Dialog {
             System.out.println("Сортировка завершена:");
             list.forEach(System.out::println);
             try {
-                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas);
+                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas, scanner);
             } catch (IOException e) {
                 System.out.println("Ошибка: При записи в файл возникла ошибка: " + e.getMessage());
             }
@@ -167,7 +167,7 @@ public class Dialog {
         }
     }
 
-    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor, String className) {
+    private static <T> void sortAndPrintByEvenIndices(List<T> list, Class<T> clas, int choice, ToIntFunction<T> extractor, String className, Scanner scanner) {
         if (list == null || list.isEmpty()) {
             System.out.println("Список пуст, сортировка невозможна.");
             return;
@@ -178,7 +178,7 @@ public class Dialog {
             System.out.println("Сортировка только четных чисел завершенна:");
             list.forEach(System.out::println);
             try {
-                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas);
+                offerSave(list, "sorted_" + className.toLowerCase() + ".json", clas, scanner);
             } catch (IOException e) {
                 System.out.println("Ошибка: При записи в файл возникла ошибка: " + e.getMessage());
             }
@@ -193,7 +193,7 @@ public class Dialog {
             return;
         }
         if (field == 1) {
-            sortAndPrint(workSpaces, WorkSpace.class, field, "WorkSpaces");
+            sortAndPrint(workSpaces, WorkSpace.class, field, "WorkSpaces", scanner);
             return;
         }
         int sortChoice = answerTaker("""
@@ -202,7 +202,7 @@ public class Dialog {
                 2: %s""".formatted(STANDARD_SORT, SORT_EVEN), scanner);
 
         if (sortChoice == 1) {
-            sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места");
+            sortAndPrint(workSpaces, WorkSpace.class, field, "Рабочие места", scanner);
         } else {
             ToIntFunction<WorkSpace> extractor = null;
             if (field == 2) {
@@ -213,16 +213,16 @@ public class Dialog {
                 System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
                 return;
             }
-            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces");
+            sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, "WorkSpaces", scanner);
         }
     }
 
-    public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType) throws IOException {
+    public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType, Scanner scanner) throws IOException {
         int choice = answerTaker("""
                 Сохранить отсортированный массив в файл?
                 1. Да
                 2. Нет
-                """);
+                """, scanner);
         if (choice == 1) {
             String fullPath = "Java102FinalProject/src/main/resources/" + defaultFileName;
             ObjectMapper objectMapper = new ObjectMapper();
