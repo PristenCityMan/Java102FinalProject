@@ -1,17 +1,15 @@
 package ru.aston.homework_05.validators;
 
-import ru.aston.homework_05.models.User;
+public abstract class UserValidationHandler<T> {
+    protected UserValidationHandler<T> next;
 
-public abstract class UserValidationHandler {
-    protected UserValidationHandler next;
-
-    public void setNext(UserValidationHandler next) {
+    public void setNext(UserValidationHandler<T> next) {
         this.next = next;
     }
 
-    public abstract void validate(User user) throws ValidationException;
+    public abstract void validate(T user) throws ValidationException;
 
-    protected void validateNext(User user) throws ValidationException {
+    protected void validateNext(T user) throws ValidationException {
         if (next != null) {
             next.validate(user);
         }
