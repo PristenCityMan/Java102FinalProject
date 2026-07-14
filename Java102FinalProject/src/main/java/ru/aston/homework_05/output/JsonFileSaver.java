@@ -34,7 +34,7 @@ public class JsonFileSaver {
                 System.out.println("Будет создан новый файл");
             }
             allData.addAll(newData);
-            objectMapper.writeValue(path.toFile(), allData);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), allData);
             System.out.println("Данные успешно записаны в файл: " + filePath);
         } catch (IOException e) {
             System.out.println("Ошибка: При работе с файлом возникла ошибка: " + e.getMessage());
