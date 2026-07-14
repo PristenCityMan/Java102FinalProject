@@ -16,7 +16,7 @@ public class JsonFileSaver {
         this.objectMapper = objectMapper;
     }
 
-    public <T> void saveToFile(String filePath, List<T> newData, Class<T> elementType) throws IOException {
+    public <T> void saveToFile(String filePath, List<T> newData, Class<T> elementType) {
         if (newData == null || newData.isEmpty()) {
             System.out.println("Нет данных для сохранения.");
             return;
