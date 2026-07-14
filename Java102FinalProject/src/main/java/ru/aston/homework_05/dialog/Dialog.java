@@ -1,12 +1,5 @@
 package ru.aston.homework_05.dialog;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.aston.homework_05.generators.BaseCollectionGenerator;
 import ru.aston.homework_05.generators.CollectionGeneratorClient;
@@ -19,6 +12,12 @@ import ru.aston.homework_05.output.JsonFileSaver;
 import ru.aston.homework_05.sort.ComparatorStrategy;
 import ru.aston.homework_05.sort.MergeSort;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 import java.util.function.ToIntFunction;
 
 public class Dialog {
@@ -34,7 +33,7 @@ public class Dialog {
     private static final String EMPTY_LIST = "Список пуст. Возврат к началу.";
     private static final List<Integer> VALID_LIST3 = Arrays.asList(1, 2, 3);
     private static final List<Integer> VALID_LIST2 = Arrays.asList(1, 2);
-    private static final String FILES_DIRECTORY = "src/main/resources/";
+    private static final String FILES_DIRECTORY = "Java102FinalProject/src/main/resources/";
 
     public static void dialog() {
         System.out.println("Вас приветствует программа сортировки классов.\n " + "Выбирайте вариант из предложенных.");
@@ -51,13 +50,13 @@ public class Dialog {
             List<WorkSpace> workSpaces = new ArrayList<>();
             if (classType == 1) {
                 users = get1stClassCollection(typeFilling, length);
-                if (users==null || users.isEmpty()){
+                if (users == null || users.isEmpty()) {
                     System.out.println(EMPTY_LIST);
                     continue;
                 }
             } else {
                 workSpaces = get2ndClassCollection(typeFilling, length);
-                if (workSpaces==null || workSpaces.isEmpty()){
+                if (workSpaces == null || workSpaces.isEmpty()) {
                     System.out.println(EMPTY_LIST);
                     continue;
                 }
@@ -175,7 +174,7 @@ public class Dialog {
         try {
             Comparator<T> comparator = ComparatorStrategy.classFieldsSort(clas, choice);
             MergeSort.sortEvenByIndices(list, extractor, comparator);
-            System.out.println("Сортировка только четных чисел завершенна:");
+            System.out.println("Сортировка только четных чисел завершена:");
             list.forEach(System.out::println);
             try {
                 offerSave(list, "sorted_workspaces.json", clas, scanner);
@@ -221,8 +220,7 @@ public class Dialog {
         int choice = answerTaker("""
                 Сохранить отсортированный массив в файл?
                 1. Да
-                2. Нет
-                """, scanner);
+                2. Нет""", scanner);
         if (choice == 1) {
             String fullPath = FILES_DIRECTORY + defaultFileName;
             ObjectMapper objectMapper = new ObjectMapper();

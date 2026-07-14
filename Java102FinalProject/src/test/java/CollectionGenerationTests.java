@@ -9,10 +9,10 @@ import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
 
 import java.util.Collection;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CollectionGenerationTests {
@@ -23,7 +23,12 @@ public class CollectionGenerationTests {
         BaseCollectionGenerator<User> placeholder = new FileCollector<>(fileName, User.class, size);
         CollectionGeneratorClient<User> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<User> collection = collectionGeneratorClient.get();
-        assertFalse(Objects.requireNonNull(collection.stream().findAny().orElse(null)).getName().isEmpty());
+        String name = collection.stream()
+                .map(User::getName)
+                .findAny()
+                .orElse(null);
+        assertNotNull(name);
+        assertFalse(name.isEmpty());
     }
 
     @Test
@@ -43,7 +48,12 @@ public class CollectionGenerationTests {
         BaseCollectionGenerator<WorkSpace> placeholder = new FileCollector<>(fileName, WorkSpace.class, size);
         CollectionGeneratorClient<WorkSpace> collectionGeneratorClient = new CollectionGeneratorClient<>(placeholder);
         Collection<WorkSpace> collection = collectionGeneratorClient.get();
-        assertFalse(Objects.requireNonNull(collection.stream().findAny().orElse(null)).getName().isEmpty());
+        String name = collection.stream()
+                .map(WorkSpace::getName)
+                .findAny()
+                .orElse(null);
+        assertNotNull(name);
+        assertFalse(name.isEmpty());
     }
 
     @Test

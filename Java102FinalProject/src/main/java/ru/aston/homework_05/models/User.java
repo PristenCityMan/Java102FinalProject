@@ -3,6 +3,7 @@ package ru.aston.homework_05.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.Contract;
+
 import ru.aston.homework_05.validators.EmailValidationHandler;
 import ru.aston.homework_05.validators.UserValidationHandler;
 import ru.aston.homework_05.validators.UsernameValidationHandler;
@@ -26,7 +27,7 @@ public class User extends BaseClassImpl {
         try {
             validationHandler.validate(this);
         } catch (ValidationException e) {
-            System.out.println("Ошибка валидации, " + this);
+            System.out.printf("Ошибка валидации: %s, пользователь %s%n", e.getMessage(), this);
         }
     }
 
@@ -44,7 +45,7 @@ public class User extends BaseClassImpl {
             try {
                 validationHandler.validate(this);
             } catch (ValidationException e) {
-                System.out.println("Ошибка валидации, " + this);
+                System.out.printf("Ошибка валидации: %s, пользователь %s%n", e.getMessage(), this);
             }
         }
     }
