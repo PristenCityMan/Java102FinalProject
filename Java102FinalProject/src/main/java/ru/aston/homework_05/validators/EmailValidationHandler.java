@@ -2,7 +2,7 @@ package ru.aston.homework_05.validators;
 
 import ru.aston.homework_05.models.User;
 
-public class EmailValidationHandler extends UserValidationHandler {
+public class EmailValidationHandler extends UserValidationHandler<User> {
     @Override
     public void validate(User user) throws ValidationException {
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {

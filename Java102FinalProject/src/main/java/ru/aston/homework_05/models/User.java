@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Contract;
 
 import ru.aston.homework_05.validators.EmailValidationHandler;
 import ru.aston.homework_05.validators.UserValidationHandler;
-import ru.aston.homework_05.validators.UsernameValidationHandler;
+import ru.aston.homework_05.validators.NameValidationHandler;
 import ru.aston.homework_05.validators.ValidationException;
 
 import java.util.Base64;
@@ -16,7 +16,7 @@ public class User extends BaseClassImpl {
     private final String name;
     private final String email;
     private String password;
-    private UserValidationHandler validationHandler;
+    private UserValidationHandler<User> validationHandler;
 
     @Contract(pure = true)
     @JsonCreator
@@ -32,7 +32,7 @@ public class User extends BaseClassImpl {
     }
 
     private void setValidators() {
-        validationHandler = new UsernameValidationHandler();
+        validationHandler = new NameValidationHandler<>();
         validationHandler.setNext(new EmailValidationHandler());
     }
 

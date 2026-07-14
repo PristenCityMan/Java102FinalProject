@@ -3,7 +3,6 @@ package ru.aston.homework_05.generators;
 import ru.aston.homework_05.models.BaseClass;
 import ru.aston.homework_05.models.User;
 import ru.aston.homework_05.models.WorkSpace;
-import ru.aston.homework_05.validators.ValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
