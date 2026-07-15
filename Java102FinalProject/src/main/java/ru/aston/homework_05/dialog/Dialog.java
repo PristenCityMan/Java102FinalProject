@@ -27,7 +27,7 @@ public class Dialog {
             2: Случайно
             3: Вручную""";
     private static final String LENGTH_TEXT = "Выберите длину массива:";
-    private static final String EXIT_TEXT = "Для выхода из программы выберете 0, для повторения работы любое другое число.";
+    private static final String EXIT_TEXT = "Для выхода из программы выберите 0, для повторения работы любое другое число.";
     private static final String STANDARD_SORT = "Стандартный";
     private static final String SORT_EVEN = "Сортировка только чётных значений";
     private static final String EMPTY_LIST = "Список пуст. Возврат к началу.";
@@ -43,8 +43,22 @@ public class Dialog {
                     Выберите класс:
                     1: %s
                     2: %s""".formatted(User.getClassName(), WorkSpace.getClassName()), VALID_LIST2, scanner);
+            if (classType == 0) {
+                scanner.close();
+                break;
+            }
+
             int typeFilling = answerTaker(TYPE_FILLING_TEXT, VALID_LIST3, scanner);
+            if (typeFilling == 0) {
+                scanner.close();
+                break;
+            }
+
             int length = answerTaker(LENGTH_TEXT, scanner);
+            if (length == 0) {
+                scanner.close();
+                break;
+            }
 
             List<User> users = new ArrayList<>();
             List<WorkSpace> workSpaces = new ArrayList<>();
@@ -63,12 +77,16 @@ public class Dialog {
             }
 
             int field = answerTaker("""
-                    Выберите поле для сортировки:
-                    1: %s
-                    2: %s
-                    3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
-                    classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
-                    classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()), VALID_LIST3, scanner);
+                Выберите поле для сортировки:
+                1: %s
+                2: %s
+                3: %s""".formatted(classType == 1 ? User.getFirstFieldName() : WorkSpace.getFirstFieldName(),
+                            classType == 1 ? User.getSecondFieldName() : WorkSpace.getSecondFieldName(),
+                            classType == 1 ? User.getThirdFieldName() : WorkSpace.getThirdFieldName()), VALID_LIST3, scanner);
+            if (field == 0) {
+                scanner.close();
+                break;
+            }
 
             switch (classType) {
                 case 1:
@@ -98,7 +116,11 @@ public class Dialog {
                 if (validAnswer.contains(choice)) {
                     return choice;
                 }
-
+            } else if (scanner.hasNext()) {
+                String s = scanner.next();
+                if (s.equalsIgnoreCase("q")) {
+                    return 0;
+                }
             }
             System.out.println("Некорректные данные. Повторите ввод.");
             scanner.nextLine();
@@ -112,6 +134,11 @@ public class Dialog {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 return choice;
+            } else if (scanner.hasNext()) {
+                String s = scanner.next();
+                if (s.equalsIgnoreCase("q")) {
+                    return 0;
+                }
             }
             System.out.println("Некорректные данные. Повторите ввод.");
             scanner.nextLine();
@@ -188,7 +215,7 @@ public class Dialog {
 
     private static void workSpaceSort(int field, List<WorkSpace> workSpaces, Scanner scanner) {
         if (workSpaces == null || workSpaces.isEmpty()) {
-            System.out.println("Ошибка: Массив пустой. Запонлите массив");
+            System.out.println("Ошибка: Массив пустой. Заполните массив");
             return;
         }
         if (field == 1) {
@@ -209,14 +236,15 @@ public class Dialog {
             } else if (field == 3) {
                 extractor = WorkSpace::getSeat;
             } else {
-                System.out.println("Ошибка: Выбранно некорректное поле для сортировки. Выбранно " + field);
+                System.out.println("Ошибка: Выбрано некорректное поле для сортировки. Выбрано " + field);
                 return;
             }
             sortAndPrintByEvenIndices(workSpaces, WorkSpace.class, field, extractor, scanner);
         }
     }
 
-    public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType, Scanner scanner) throws IOException {
+    public static <T> void offerSave(List<T> data, String defaultFileName, Class<T> elementType, Scanner scanner)
+            throws IOException {
         int choice = answerTaker("""
                 Сохранить отсортированный массив в файл?
                 1. Да
