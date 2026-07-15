@@ -12,7 +12,6 @@ import java.util.List;
 public class FileCollector<T extends BaseClass> extends BaseCollectionGenerator<T> {
     private final String filename;
     private final Class<T> _class;
-    private final int size;
 
     public FileCollector(String filename, Class<T> elementClass, int size) {
         this.filename = filename;
